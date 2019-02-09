@@ -12,3 +12,6 @@ BuildingEscape/Content/StarterContent/
 # Visual Studio generated files #
 #################################
 *.VC.db
+*.VC.db-shm
+*.VC.db-wal
+*.ipch
