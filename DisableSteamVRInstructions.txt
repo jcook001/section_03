@@ -1,0 +1,14 @@
+Hello to disable SteamVR at the launch of unreal engine I did like this: open the file with a text editor :
+
+C:\Program Files\Epic Games\"Engine Version"\Engine\Plugins\Runtime\Steam\SteamVR\SteamVR.uplugin
+
+modify the line : "EnabledByDefault" : true,
+
+with : "EnabledByDefault" : false,
+
+save the file
+
+The SteamVR plugin will no longer launch with the engine.
+
+Found on:
+https://answers.unrealengine.com/questions/572865/how-to-stop-epic-launcher-auto-starting-steamvr.html?sort=oldest
