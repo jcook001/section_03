@@ -33,7 +33,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	//Get player view point this tick
+	///Get player view point this tick
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
 
@@ -61,10 +61,24 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		10.f
 	);
 
-	
+	///Setup
+	//for complex collision, change false to true
+	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
 
-	//Ray-cast out to reach distance
+	///Line-trace (Ray-cast) out to reach distance
+	FHitResult Hit;
+	
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		TraceParameters
+		);
 
 	//See what we hit
+	
+	//WIP for Lecture 85
+	//UE_LOG(LogTemp, Warning, TEXT("Debug hit result: %s"), *Hit.GetActor.Actor());
 }
 
