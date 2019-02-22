@@ -78,7 +78,12 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	//See what we hit
 	
-	//WIP for Lecture 85
-	//UE_LOG(LogTemp, Warning, TEXT("Debug hit result: %s"), *Hit.GetActor.Actor());
+	//Print the actor we hit to the log
+	AActor* ActorHit = Hit.GetActor();
+
+	if (ActorHit) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Debug hit result: %s"), *ActorHit->GetName());
+	}
 }
 
