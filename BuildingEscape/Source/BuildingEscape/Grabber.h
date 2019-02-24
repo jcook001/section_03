@@ -28,7 +28,7 @@ public:
 
 private:
 	//Length of grabber range
-	float Reach = 100.f;
+	float Reach = 150.f;
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
 
@@ -46,4 +46,10 @@ private:
 
 	//Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	//Determines players viewpoint & rotation and returns the reach extended from this location
+	const FVector GetReachLineEnd();
+
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
 };
