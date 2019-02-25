@@ -23,6 +23,10 @@ void UOpenDoor::BeginPlay()
 	
 	Owner = GetOwner();
 	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!ActorThatOpens)
+	{
+		UE_LOG(LogTemp, Error, TEXT("ActorThatOpens has not been set!"));
+	}
 }
 
 void UOpenDoor::OpenDoor()
