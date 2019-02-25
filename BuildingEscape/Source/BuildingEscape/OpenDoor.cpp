@@ -25,7 +25,7 @@ void UOpenDoor::BeginPlay()
 	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (!ActorThatOpens)
 	{
-		UE_LOG(LogTemp, Error, TEXT("ActorThatOpens has not been set!"));
+		UE_LOG(LogTemp, Error, TEXT("ActorThatOpens has not been set! Have you tried possessing the player automatically when simulating in Unreal?"));
 	}
 }
 
