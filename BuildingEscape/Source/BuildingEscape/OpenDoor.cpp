@@ -23,22 +23,19 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-	
 	Owner = GetOwner();
-	//ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
-	//if (!ActorThatOpens)
-	//{
-	//	UE_LOG(LogTemp, Error, TEXT("ActorThatOpens has not been set! Have you tried possessing the player automatically when simulating in Unreal?"));
-	//}
+	if (!PressurePlate) { UE_LOG(LogTemp, Error, TEXT("%s is missing PressurePlate"), *GetOwner()->GetName()); }
 }
 
 void UOpenDoor::OpenDoor()
 {
+	if (!Owner) { UE_LOG(LogTemp, Error, TEXT("Owner is nullptr")) return; }
 	Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
 }
 
 void UOpenDoor::CloseDoor()
 {
+	if (!Owner) { UE_LOG(LogTemp, Error, TEXT("Owner is nullptr")) return; }
 	Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 }
 
@@ -69,7 +66,8 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
 	float TotalMass = 0.f;
 
 	//Find all the overlapping actors
-	TArray<AActor*> OverlappingActors; 
+	TArray<AActor*> OverlappingActors;
+	if (!PressurePlate) { return TotalMass; }
 	PressurePlate->GetOverlappingActors(OUT OverlappingActors);
 
 	//iterate through them adding their mass
