@@ -17,3 +17,8 @@
 *.ipch
 *.suo
 *.sln
+
+#############################
+# Unused Downloaded Content #
+#############################
+BuildingEscape/Content/ContentPacks/

@@ -27,20 +27,6 @@ void UOpenDoor::BeginPlay()
 	if (!PressurePlate) { UE_LOG(LogTemp, Error, TEXT("%s is missing PressurePlate"), *GetOwner()->GetName()); }
 }
 
-void UOpenDoor::OpenDoor()
-{
-	if (!Owner) { UE_LOG(LogTemp, Error, TEXT("Owner is nullptr")) return; }
-	//Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
-	OnOpenRequest.Broadcast();
-}
-
-void UOpenDoor::CloseDoor()
-{
-	if (!Owner) { UE_LOG(LogTemp, Error, TEXT("Owner is nullptr")) return; }
-	Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
-}
-
-
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -49,14 +35,11 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	// Poll the Trigger Volume
 	if (GetTotalMassOfActorsOnPlate() > MassToOpenDoor)
 	{
-		OpenDoor();
-		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+		OnOpen.Broadcast();
 	}
-
-	//check if it's time to close the door
-	if ((GetWorld()->GetTimeSeconds() - LastDoorOpenTime) > DoorCloseDelay)
+	else
 	{
-		CloseDoor();
+		OnClose.Broadcast();
 	}
 
 	
